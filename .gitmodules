@@ -1,0 +1,8 @@
+[submodule "libs/android-common"]
+	path = libs/android-common
+	url = git@github.com:yakuraion/android-common.git
+	branch = master
+[submodule "gradle/plugins/code-check"]
+	path = gradle/plugins/code-check
+	url = git@github.com:yakuraion/plugin-code-check.git
+	branch = master

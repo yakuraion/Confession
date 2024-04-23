@@ -1,0 +1,113 @@
+[versions]
+android = "8.1.1"
+kotlin = "1.9.20"
+kotlin-coroutines = "1.7.3"
+ksp = "1.9.20-1.0.14"
+compose-bom = "2023.10.01"
+accompanist = "0.32.0"
+android-lifecycle = "2.6.2"
+navigation = "2.7.5"
+room = "2.5.2"
+retrofit = "2.9.0"
+destinations-compose = "0.3.0"
+
+[libraries]
+android-application-plugin = { module = "com.android.application:com.android.application.gradle.plugin", version.ref = "android" }
+android-library-plugin = { module = "com.android.library:com.android.library.gradle.plugin", version.ref = "android" }
+
+kotlin-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+ksp-plugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+
+desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.3" }
+
+kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
+kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlin-coroutines" }
+
+kotlin-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version = "0.3.5" }
+
+koin-bom = { module = "io.insert-koin:koin-bom", version = "3.5.1" }
+koin-core = { module = "io.insert-koin:koin-core" }
+koin-core-coroutines = { module = "io.insert-koin:koin-core-coroutines" }
+koin-test = { module = "io.insert-koin:koin-test" }
+koin-test-junit4 = { module = "io.insert-koin:koin-test-junit4" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose" }
+koin-ksp = { module = "io.insert-koin:koin-ksp-compiler", version = "1.3.0" }
+
+timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
+
+androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.12.0" }
+
+android-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "android-lifecycle" }
+compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "android-lifecycle" }
+
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+compose-runtime = { module = "androidx.compose.runtime:runtime" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-junit = { module = "androidx.compose.ui:ui-test-junit4" }
+compose-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+compose-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+
+compose-activity = { module = "androidx.activity:activity-compose", version = "1.8.0" }
+compose-constraint-layout = { module = "androidx.constraintlayout:constraintlayout-compose", version = "1.0.1" }
+
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
+
+navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+navigation-testing = { module = "androidx.navigation:navigation-testing", version.ref = "navigation" }
+
+destinations-compose-core = { module = "io.github.yakuraion.destinationscompose:core", version.ref = "destinations-compose" }
+destinations-compose-ksp = { module = "io.github.yakuraion.destinationscompose:ksp", version.ref = "destinations-compose" }
+destinations-compose-viewmodel-koin = { module = "io.github.yakuraion.destinationscompose:ksp-viewmodel-koin", version.ref = "destinations-compose" }
+
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+
+gson = { module = "com.google.code.gson:gson", version = "2.10.1" }
+
+datastore = { module = "androidx.datastore:datastore-preferences", version = "1.0.0" }
+
+okhttp-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version = "4.11.0" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+
+junit = { module = "junit:junit", version = "4.13.2" }
+mockk = { module = "io.mockk:mockk", version = "1.13.7" }
+
+androidx-test-core = { module = "androidx.test:core", version = "1.5.0" }
+androidx-test-core-ktx = { module = "androidx.test:core-ktx", version = "1.5.0" }
+androidx-test-junit = { module = "androidx.test.ext:junit", version = "1.1.5" }
+androidx-test-junit-ktx = { module = "androidx.test.ext:junit-ktx", version = "1.1.5" }
+androidx-test-runner = { module = "androidx.test:runner", version = "1.5.2" }
+
+robolectric = { module = "org.robolectric:robolectric", version = "4.11.1" }
+
+seismic = { module = "com.squareup:seismic", version = "1.0.3" }
+
+firebase-bom = { module = "com.google.firebase:firebase-bom", version = "32.6.0" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+
+yakuraion-android-common-kotlin = { module = "pro.yakuraion.android-common:kotlin", version = "1" }
+yakuraion-android-common-coroutines = { module = "pro.yakuraion.android-common:coroutines", version = "1" }
+yakuraion-android-common-coroutines-tests = { module = "pro.yakuraion.android-common:coroutines-tests", version = "1" }
+yakuraion-android-common-network = { module = "pro.yakuraion.android-common:network", version = "1" }
+yakuraion-android-common-mockwebserver-wrapper = { module = "pro.yakuraion.android-common:mockwebserver-wrapper", version = "1" }
+
+[bundles]
+androidx-test = ["androidx-test-core", "androidx-test-core-ktx", "androidx-test-junit", "androidx-test-junit-ktx", "androidx-test-runner"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android" }
+android-library = { id = "com.android.library", version.ref = "android" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+google-services = { id = "com.google.gms.google-services", version = "4.4.0" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.9" }
