@@ -1,20 +1,31 @@
 package pro.yakuraion.confession.home
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import io.github.yakuraion.destinationscompose.core.DestinationScreen
 import org.koin.androidx.compose.koinViewModel
+import pro.yakuraion.confession.commonui.R
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
 import pro.yakuraion.confession.home.components.HomeLastConfessionCard
 import java.time.LocalDate
@@ -36,19 +47,26 @@ private fun HomeScreen(
     Scaffold(
         modifier = Modifier.drawBackground()
     ) { paddingValues ->
-        val modifier = Modifier
-            .fillMaxSize()
-            .drawBackground()
-            .padding(paddingValues)
-        when (state) {
-            is HomeState.Content -> {
-                Content(
-                    state = state,
-                    modifier = modifier,
-                )
-            }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .drawBackground()
+                .padding(paddingValues)
+        ) {
 
-            is HomeState.Loading -> Unit
+            BackgroundImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+            )
+
+            when (state) {
+                is HomeState.Content -> {
+                    Content(state = state)
+                }
+
+                is HomeState.Loading -> Unit
+            }
         }
     }
 }
@@ -75,6 +93,25 @@ private fun Content(
             }
         )
     }
+}
+
+@Composable
+private fun BackgroundImage(
+    modifier: Modifier = Modifier,
+) {
+    val density = LocalDensity.current
+    val heightOfBottomBar = with(LocalDensity.current) { 80.dp.toPx() }
+    val insetsBottom = WindowInsets.systemBars.getBottom(density)
+    val height = heightOfBottomBar + insetsBottom
+
+    Image(
+        painter = painterResource(id = R.drawable.il_home_background),
+        contentDescription = null,
+        modifier = modifier.graphicsLayer {
+            translationY = height
+        },
+        contentScale = ContentScale.Crop
+    )
 }
 
 private fun Modifier.drawBackground(): Modifier {
