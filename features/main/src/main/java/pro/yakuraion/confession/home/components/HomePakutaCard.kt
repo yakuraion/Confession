@@ -2,9 +2,11 @@ package pro.yakuraion.confession.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -15,14 +17,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import pro.yakuraion.confession.commonui.R
-import java.time.LocalDate
+import pro.yakuraion.confession.commonui.compose.widgets.buttons.AppCheckbox
 
 @Composable
-fun HomeLastConfessionCard(
-    now: LocalDate,
-    lastDate: LocalDate,
+fun HomePakutaCard(
+    pakutaText: String,
+    checked: Boolean,
+    onCheckedChange: (isChecked: Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val shape = RoundedCornerShape(20.dp)
@@ -33,48 +37,46 @@ fun HomeLastConfessionCard(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         CompositionLocalProvider(LocalContentColor provides Color.White) {
-            Title()
-            Spacer(modifier = Modifier.height(16.dp))
-            DateText(date = lastDate)
-            Spacer(modifier = Modifier.height(16.dp))
-            DaysAgoText(now = now, date = lastDate)
-        }
+            Text(
+                text = stringResource(id = R.string.home_pakuta_title),
+                style = MaterialTheme.typography.titleLarge,
+            )
 
+            Spacer(modifier = Modifier.height(16.dp))
+
+            CheckboxRow(
+                pakutaText = pakutaText,
+                checked = checked,
+                onCheckedChange = onCheckedChange,
+                modifier = Modifier
+            )
+        }
     }
 }
 
 @Composable
-private fun Title(
+private fun CheckboxRow(
+    pakutaText: String,
+    checked: Boolean,
+    onCheckedChange: (isChecked: Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Text(
-        text = stringResource(id = R.string.home_last_confession_title),
+    Row(
         modifier = modifier,
-        style = MaterialTheme.typography.titleLarge
-    )
-}
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        AppCheckbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange
+        )
 
-@Composable
-private fun DateText(
-    date: LocalDate,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = "15 красавіка 2024 г.",
-        modifier = modifier,
-        style = MaterialTheme.typography.headlineMedium,
-    )
-}
+        Spacer(modifier = Modifier.width(4.dp))
 
-@Composable
-private fun DaysAgoText(
-    now: LocalDate,
-    date: LocalDate,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = "1 месяц і 2 дні назад",
-        modifier = modifier,
-        style = MaterialTheme.typography.titleLarge
-    )
+        Text(
+            text = pakutaText,
+            style = MaterialTheme.typography.bodyLarge,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 2,
+        )
+    }
 }

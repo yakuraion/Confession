@@ -3,9 +3,11 @@ package pro.yakuraion.confession.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.Composable
@@ -21,13 +23,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import io.github.yakuraion.destinationscompose.core.DestinationScreen
 import org.koin.androidx.compose.koinViewModel
 import pro.yakuraion.confession.commonui.R
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
 import pro.yakuraion.confession.home.components.HomeLastConfessionCard
+import pro.yakuraion.confession.home.components.HomePakutaCard
 import pro.yakuraion.confession.home.components.HomeScreenTopBar
 import java.time.LocalDate
 
@@ -88,21 +89,24 @@ private fun Content(
     state: HomeState.Content,
     modifier: Modifier = Modifier,
 ) {
-    ConstraintLayout(
+    Column(
         modifier = modifier
             .fillMaxSize()
+            .padding(horizontal = 20.dp)
     ) {
-        val (lastConfessionDateRef) = createRefs()
-
         HomeLastConfessionCard(
             now = state.now,
             lastDate = state.lastConfessionDate,
-            modifier = Modifier.constrainAs(lastConfessionDateRef) {
-                start.linkTo(parent.start, 20.dp)
-                end.linkTo(parent.end, 20.dp)
-                top.linkTo(parent.top, 40.dp)
-                width = Dimension.fillToConstraints
-            }
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        HomePakutaCard(
+            pakutaText = "Вяночак да Божай міласэрнасці",
+            checked = false,
+            onCheckedChange = {},
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }

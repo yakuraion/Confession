@@ -20,8 +20,8 @@
     <string name="stacks_navigation_label_confession">Споведзь</string>
     <string name="stacks_navigation_label_for_children">Для дзяцей</string>
 
-    <string name="last_confession_title">Дата апошняй споведзі</string>
-    <string name="last_confession_last">назад</string>
-    <string name="pakuta_title">Пакута:</string>
+    <string name="home_last_confession_title">Дата апошняй споведзі</string>
+    <string name="home_last_confession_last">назад</string>
+    <string name="home_pakuta_title">Пакута:</string>
 
 </resources>
