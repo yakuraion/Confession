@@ -1,7 +1,5 @@
 package pro.yakuraion.confession.newconfession
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -13,16 +11,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,13 +30,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.yakuraion.destinationscompose.core.DestinationScreen
 import org.koin.androidx.compose.koinViewModel
+import pro.yakuraion.confession.common.NavigationIconClose
+import pro.yakuraion.confession.common.TitleText
 import pro.yakuraion.confession.commonui.R
 import pro.yakuraion.confession.commonui.compose.coroutines.collectInLaunchedEffect
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
@@ -142,10 +138,11 @@ private fun Content(
                 .weight(1f)
                 .verticalScroll(scrollState)
         ) {
-            Title(
+            TitleText(
+                text = stringResource(id = R.string.new_confession_title),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 50.dp)
+                    .padding(horizontal = 50.dp),
             )
 
             Spacer(modifier = Modifier.height(26.dp))
@@ -192,29 +189,8 @@ private fun TopBar(
         modifier = modifier.padding(end = 20.dp),
         contentAlignment = Alignment.CenterEnd
     ) {
-        IconButton(
-            onClick = onCloseClick,
-            modifier = Modifier
-                .size(42.dp)
-                .background(Color(0x38202020), CircleShape),
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_close),
-                contentDescription = null,
-                modifier = Modifier.size(18.dp)
-            )
-        }
+        NavigationIconClose(onClick = onCloseClick)
     }
-}
-
-@Composable
-private fun Title(modifier: Modifier = Modifier) {
-    Text(
-        text = stringResource(id = R.string.new_confession_title),
-        modifier = modifier,
-        color = Color.White,
-        style = MaterialTheme.typography.headlineMedium,
-    )
 }
 
 @Composable

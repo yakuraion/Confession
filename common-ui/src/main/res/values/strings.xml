@@ -20,6 +20,15 @@
     <string name="new_confession_pakuta_placeholder">Ойча Наш</string>
     <string name="new_confession_comment_label">Каментар</string>
     <string name="new_confession_continue_button">Гатова</string>
+    
+    <string name="confession_title">Споведзь</string>
+    <string name="confession_subtitle">для дарослых</string>
+    <string name="confession_about">Пра сакрамэнт споведзі і грахі</string>
+    <string name="confession_order">Парадак святой споведзі</string>
+    <string name="confession_sins">Рахунак сумлення</string>
+    <string name="confession_praying">Малітвы перад і пасля споведзі</string>
+    <string name="confession_sins_for_teenagers">Рахунак сумлення для падлеткаў</string>
+    <string name="confession_everyday_sins">Штодзёны рахунак сумлення</string>
 
     <plurals name="weeks">
         <item quantity="one">тыдзень</item>
