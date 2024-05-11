@@ -70,7 +70,7 @@ private fun QuoteText(modifier: Modifier = Modifier) {
             прымаць проціяддзе споведзі”
         """.trimIndent(),
             modifier = Modifier.fillMaxWidth(),
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyLarge,
         )
 
         Spacer(modifier = Modifier.height(14.dp))
@@ -78,9 +78,9 @@ private fun QuoteText(modifier: Modifier = Modifier) {
         Text(
             text = "Антоній Падуанскі",
             modifier = Modifier.align(Alignment.End),
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyMedium,
         )
 
-        Spacer(modifier = Modifier.height(70.dp))
+        Spacer(modifier = Modifier.height(60.dp))
     }
 }
