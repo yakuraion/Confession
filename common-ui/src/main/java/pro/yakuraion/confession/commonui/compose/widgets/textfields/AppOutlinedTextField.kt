@@ -52,7 +52,7 @@ fun AppOutlinedTextField(
             focusedTextColor = Color.White,
             unfocusedTextColor = Color.White,
             disabledTextColor = Color.White,
-            cursorColor = Color(0xFF5D03CF),
+            cursorColor = Color.White,
             focusedBorderColor = Color.White,
             unfocusedBorderColor = Color.White,
             disabledBorderColor = Color.White,

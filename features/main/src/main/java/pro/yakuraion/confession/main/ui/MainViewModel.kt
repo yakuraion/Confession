@@ -17,4 +17,8 @@ class MainViewModel : ViewModel() {
     fun onNewConfessionBackRequest() {
         _navigationCommands.trySend(MainNavigationCommand.NavigateBack)
     }
+
+    fun onNewConfessionSuccess() {
+        _navigationCommands.trySend(MainNavigationCommand.NavigateBack)
+    }
 }

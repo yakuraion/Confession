@@ -25,6 +25,7 @@ fun MainScreen(
         navigationCommands = viewModel.navigationCommands,
         onStacksOpenCreateConfessionRequest = viewModel::onStacksOpenCreateConfessionRequest,
         onNewConfessionBackRequest = viewModel::onNewConfessionBackRequest,
+        onNewConfessionSuccess = viewModel::onNewConfessionSuccess,
     )
 }
 
@@ -33,6 +34,7 @@ internal fun MainScreen(
     navigationCommands: Flow<MainNavigationCommand>,
     onStacksOpenCreateConfessionRequest: () -> Unit,
     onNewConfessionBackRequest: () -> Unit,
+    onNewConfessionSuccess: () -> Unit,
 ) {
     val navController = rememberNavController()
     NavHost(
@@ -46,6 +48,7 @@ internal fun MainScreen(
         )
         newConfessionScreenComposable(
             onBackRequest = onNewConfessionBackRequest,
+            onSuccess = onNewConfessionSuccess,
         )
     }
 

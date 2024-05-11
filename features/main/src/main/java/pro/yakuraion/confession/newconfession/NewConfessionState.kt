@@ -12,4 +12,8 @@ class NewConfessionState {
     var pakuta: String by mutableStateOf("")
 
     var comment: String by mutableStateOf("")
+
+    var isContinueEnabled: Boolean by mutableStateOf(false)
+
+    var isContinueLoading: Boolean by mutableStateOf(false)
 }

@@ -7,14 +7,18 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.IconButton
@@ -24,10 +28,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import io.github.yakuraion.destinationscompose.core.DestinationScreen
 import org.koin.androidx.compose.koinViewModel
 import pro.yakuraion.confession.commonui.R
+import pro.yakuraion.confession.commonui.compose.coroutines.collectInLaunchedEffect
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
 import pro.yakuraion.confession.commonui.compose.widgets.textfields.AppOutlinedTextField
 import pro.yakuraion.confession.newconfession.components.NewConfessionDialogs
@@ -45,15 +52,19 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun NewConfessionScreen(
     onBackRequest: () -> Unit,
+    onSuccess: () -> Unit,
     viewModel: NewConfessionViewModel = koinViewModel(),
 ) {
+    viewModel.onSuccess.collectInLaunchedEffect {
+        onSuccess.invoke()
+    }
+
     NewConfessionScreen(
         state = viewModel.state,
         onCloseClick = onBackRequest,
         onDateClick = viewModel::onDateClick,
-        onDateSelect = viewModel::onDateSelect,
-        onPakutaChanged = viewModel::onPakutaChanged,
-        onCommentChanged = viewModel::onCommentChanged,
+        onPakutaChange = viewModel::onPakutaChange,
+        onCommentChange = viewModel::onCommentChange,
         onContinueClick = viewModel::onContinueClick,
         dialogsState = viewModel.dialogsState,
         onDatePickerDialogDismissRequest = viewModel::onDatePickerDialogDismissRequest,
@@ -66,9 +77,8 @@ private fun NewConfessionScreen(
     state: NewConfessionState,
     onCloseClick: () -> Unit,
     onDateClick: () -> Unit,
-    onDateSelect: (date: LocalDate) -> Unit,
-    onPakutaChanged: (pakuta: String) -> Unit,
-    onCommentChanged: (comment: String) -> Unit,
+    onPakutaChange: (pakuta: String) -> Unit,
+    onCommentChange: (comment: String) -> Unit,
     onContinueClick: () -> Unit,
     dialogsState: NewConfessionDialogsState,
     onDatePickerDialogDismissRequest: () -> Unit,
@@ -78,9 +88,8 @@ private fun NewConfessionScreen(
         state = state,
         onCloseClick = onCloseClick,
         onDateClick = onDateClick,
-        onDateSelect = onDateSelect,
-        onPakutaChanged = onPakutaChanged,
-        onCommentChanged = onCommentChanged,
+        onPakutaChange = onPakutaChange,
+        onCommentChange = onCommentChange,
         onContinueClick = onContinueClick,
     )
 
@@ -96,52 +105,79 @@ private fun Content(
     state: NewConfessionState,
     onCloseClick: () -> Unit,
     onDateClick: () -> Unit,
-    onDateSelect: (date: LocalDate) -> Unit,
-    onPakutaChanged: (pakuta: String) -> Unit,
-    onCommentChanged: (comment: String) -> Unit,
+    onPakutaChange: (pakuta: String) -> Unit,
+    onCommentChange: (comment: String) -> Unit,
     onContinueClick: () -> Unit,
 ) {
+    val topPadding = with(LocalDensity.current) {
+        WindowInsets.systemBars.getTop(this).toDp()
+    }
+    val bottomPadding = with(LocalDensity.current) {
+        WindowInsets.systemBars.getBottom(this).toDp()
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
             .drawBackground()
-            .systemBarsPadding()
+            .padding()
+            .imePadding()
     ) {
+        Spacer(modifier = Modifier.height(topPadding))
+
         Spacer(modifier = Modifier.height(20.dp))
 
         TopBar(
             onCloseClick = onCloseClick,
             modifier = Modifier.fillMaxWidth(),
         )
+
         Spacer(modifier = Modifier.height(18.dp))
 
-        Title(
+        val scrollState = rememberScrollState()
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 50.dp)
-        )
+                .weight(1f)
+                .verticalScroll(scrollState)
+        ) {
+            Title(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 50.dp)
+            )
 
-        Spacer(modifier = Modifier.height(26.dp))
+            Spacer(modifier = Modifier.height(26.dp))
 
-        DateField(
-            date = state.date,
-            onClick = onDateClick,
-        )
+            DateField(
+                date = state.date,
+                onClick = onDateClick,
+            )
 
-        Spacer(modifier = Modifier.height(18.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
-        PakutaField(pakuta = state.pakuta)
+            PakutaField(
+                pakuta = state.pakuta,
+                onPakutaChange = onPakutaChange,
+            )
 
-        Spacer(modifier = Modifier.height(18.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
-        CommentField(comment = state.comment)
+            CommentField(
+                comment = state.comment,
+                onCommentChange = onCommentChange,
+            )
 
-        Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
-        ContinueButton(
-            onClick = onContinueClick,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-        )
+            ContinueButton(
+                onClick = onContinueClick,
+                isEnabled = state.isContinueEnabled,
+                isLoading = state.isContinueLoading,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+            )
+
+            Spacer(modifier = Modifier.height(bottomPadding))
+        }
     }
 }
 
@@ -214,6 +250,7 @@ private fun DateField(
 @Composable
 private fun PakutaField(
     pakuta: String,
+    onPakutaChange: (pakuta: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.padding(horizontal = 20.dp)) {
@@ -226,9 +263,10 @@ private fun PakutaField(
 
         Spacer(modifier = Modifier.height(12.dp))
         AppOutlinedTextField(
-            value = "12/14/15",
-            onValueChange = {},
-            modifier = Modifier.fillMaxWidth()
+            value = pakuta,
+            onValueChange = onPakutaChange,
+            modifier = Modifier.fillMaxWidth(),
+            placeholder = stringResource(id = R.string.new_confession_pakuta_placeholder)
         )
     }
 }
@@ -236,6 +274,7 @@ private fun PakutaField(
 @Composable
 private fun CommentField(
     comment: String,
+    onCommentChange: (comment: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.padding(horizontal = 20.dp)) {
@@ -248,9 +287,10 @@ private fun CommentField(
 
         Spacer(modifier = Modifier.height(12.dp))
         AppOutlinedTextField(
-            value = "12/14/15",
-            onValueChange = {},
-            modifier = Modifier.fillMaxWidth()
+            value = comment,
+            onValueChange = onCommentChange,
+            modifier = Modifier.fillMaxWidth(),
+            minLines = 3,
         )
     }
 }
@@ -258,16 +298,22 @@ private fun CommentField(
 @Composable
 private fun ContinueButton(
     onClick: () -> Unit,
+    isEnabled: Boolean,
+    isLoading: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Button(
         onClick = onClick,
         modifier = modifier
-            .height(42.dp),
+            .height(42.dp)
+            .alpha(if (isEnabled) 1f else 0.5f),
+        enabled = isEnabled && !isLoading,
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0x3BFFFFFF),
             contentColor = Color.White,
+            disabledContainerColor = Color(0x3BFFFFFF),
+            disabledContentColor = Color.White,
         )
     ) {
         Text(
@@ -317,9 +363,8 @@ private fun Preview() {
             state = state,
             onCloseClick = {},
             onDateClick = {},
-            onDateSelect = {},
-            onPakutaChanged = {},
-            onCommentChanged = {},
+            onPakutaChange = {},
+            onCommentChange = {},
             onContinueClick = {},
             dialogsState = NewConfessionDialogsState.None,
             onDatePickerDialogDismissRequest = {},
