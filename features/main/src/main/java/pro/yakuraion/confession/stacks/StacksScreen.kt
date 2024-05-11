@@ -30,19 +30,25 @@ import pro.yakuraion.confession.home.HomeScreen
 @DestinationScreen
 @Composable
 fun StacksScreen(
+    onOpenCreateConfessionRequest: () -> Unit,
     viewModel: StacksViewModel = koinViewModel(),
 ) {
-    StacksScreenPrivate()
+    StacksScreen(
+        onHomeOpenCreateConfessionRequest = onOpenCreateConfessionRequest,
+    )
 }
 
 @Composable
-private fun StacksScreenPrivate() {
+private fun StacksScreen(
+    onHomeOpenCreateConfessionRequest: () -> Unit,
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
         val pagerState = rememberPagerState { StacksPage.entries.count() }
         Pager(
             state = pagerState,
+            onHomeOpenCreateConfessionRequest = onHomeOpenCreateConfessionRequest,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f),
@@ -101,6 +107,7 @@ private fun BottomNavigationBar(
 @Composable
 private fun Pager(
     state: PagerState,
+    onHomeOpenCreateConfessionRequest: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     HorizontalPager(
@@ -108,7 +115,10 @@ private fun Pager(
         modifier = modifier,
     ) { page ->
         when (page) {
-            StacksPage.HOME.ordinal -> HomeScreen()
+            StacksPage.HOME.ordinal -> HomeScreen(
+                onOpenCreateConfessionRequest = onHomeOpenCreateConfessionRequest,
+            )
+
             else -> Unit
         }
     }

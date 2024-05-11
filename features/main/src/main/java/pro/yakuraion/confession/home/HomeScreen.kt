@@ -21,22 +21,29 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.yakuraion.destinationscompose.core.DestinationScreen
 import org.koin.androidx.compose.koinViewModel
+import pro.yakuraion.confession.commonui.compose.coroutines.collectInLaunchedEffect
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
-import pro.yakuraion.confession.home.components.HomeLastConfessionCard
-import pro.yakuraion.confession.home.components.HomePakutaCard
 import pro.yakuraion.confession.home.components.HomeQuoteBlock
 import pro.yakuraion.confession.home.components.HomeScreenTopBar
+import pro.yakuraion.confession.home.components.lastconfession.HomeLastConfession
+import pro.yakuraion.confession.home.components.nolastconfession.HomeNoLastConfession
 import java.time.LocalDate
 
 @DestinationScreen
 @Composable
 fun HomeScreen(
+    onOpenCreateConfessionRequest: () -> Unit,
     viewModel: HomeViewModel = koinViewModel(),
 ) {
+    viewModel.onOpenCreateConfessionRequest.collectInLaunchedEffect {
+        onOpenCreateConfessionRequest.invoke()
+    }
+
     HomeScreen(
         state = viewModel.state,
         onCalendarClick = viewModel::onCalendarClick,
         onNotificationsClick = viewModel::onNotificationsClick,
+        onCreateConfessionClick = viewModel::onCreateConfessionClick,
     )
 }
 
@@ -45,6 +52,7 @@ private fun HomeScreen(
     state: HomeState,
     onCalendarClick: () -> Unit,
     onNotificationsClick: () -> Unit,
+    onCreateConfessionClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -69,41 +77,24 @@ private fun HomeScreen(
                     .padding(top = topPadding)
             )
 
+            Spacer(modifier = Modifier.height(20.dp))
+
             when (state) {
-                is HomeState.Content -> {
-                    Content(state = state)
+                is HomeState.Loading -> Unit
+
+                is HomeState.NoLastConfession -> {
+                    HomeNoLastConfession(
+                        onCreateConfessionClick = onCreateConfessionClick,
+                    )
                 }
 
-                is HomeState.Loading -> Unit
+                is HomeState.LastConfession -> {
+                    HomeLastConfession(
+                        state = state,
+                    )
+                }
             }
         }
-    }
-}
-
-@Composable
-private fun Content(
-    state: HomeState.Content,
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp)
-    ) {
-        HomeLastConfessionCard(
-            now = state.now,
-            lastDate = state.lastConfessionDate,
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        HomePakutaCard(
-            pakutaText = "Вяночак да Божай міласэрнасці",
-            checked = false,
-            onCheckedChange = {},
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }
 
@@ -136,16 +127,32 @@ private fun backgroundBrush(
 
 @Preview
 @Composable
-private fun Preview() {
-    val state = HomeState.Content(
+private fun PreviewLastConfession() {
+    val state = HomeState.LastConfession(
         now = LocalDate.of(2024, 5, 21),
         lastConfessionDate = LocalDate.of(2024, 4, 20),
+        lastConfessionPakuta = "Вячочак до Божай Миласернасци"
     )
     AppTheme {
         HomeScreen(
             state = state,
             onCalendarClick = {},
             onNotificationsClick = {},
+            onCreateConfessionClick = {},
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewNoLastConfession() {
+    val state = HomeState.NoLastConfession
+    AppTheme {
+        HomeScreen(
+            state = state,
+            onCalendarClick = {},
+            onNotificationsClick = {},
+            onCreateConfessionClick = {},
         )
     }
 }

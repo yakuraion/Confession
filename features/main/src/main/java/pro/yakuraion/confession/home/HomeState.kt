@@ -6,8 +6,11 @@ sealed class HomeState {
 
     data object Loading : HomeState()
 
-    data class Content(
+    data object NoLastConfession : HomeState()
+
+    data class LastConfession(
         val now: LocalDate,
         val lastConfessionDate: LocalDate,
+        val lastConfessionPakuta: String,
     ) : HomeState()
 }

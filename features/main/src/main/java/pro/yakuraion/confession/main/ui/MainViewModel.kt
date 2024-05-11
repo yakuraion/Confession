@@ -9,4 +9,12 @@ class MainViewModel : ViewModel() {
 
     private val _navigationCommands: Channel<MainNavigationCommand> = Channel(Channel.BUFFERED)
     val navigationCommands: Flow<MainNavigationCommand> = _navigationCommands.receiveAsFlow()
+
+    fun onStacksOpenCreateConfessionRequest() {
+        _navigationCommands.trySend(MainNavigationCommand.NavigateToNewConfession)
+    }
+
+    fun onNewConfessionBackRequest() {
+        _navigationCommands.trySend(MainNavigationCommand.NavigateBack)
+    }
 }
