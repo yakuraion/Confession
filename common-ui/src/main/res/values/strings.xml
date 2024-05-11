@@ -15,6 +15,11 @@
     <string name="top_bar_icon_settings_content_description">Settings</string>
     <string name="top_bar_icon_search_content_description">Search</string>
 
+    <string name="stacks_navigation_label_home">Галоўная</string>
+    <string name="stacks_navigation_label_topics">Карыснае</string>
+    <string name="stacks_navigation_label_confession">Споведзь</string>
+    <string name="stacks_navigation_label_for_children">Для дзяцей</string>
+
     <string name="last_confession_title">Дата апошняй споведзі</string>
     <string name="last_confession_last">назад</string>
     <string name="pakuta_title">Пакута:</string>

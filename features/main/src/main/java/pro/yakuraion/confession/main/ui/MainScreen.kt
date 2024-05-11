@@ -11,9 +11,9 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.androidx.compose.koinViewModel
 import pro.yakuraion.confession.commonui.compose.coroutines.collectInLaunchedEffect
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
-import pro.yakuraion.confession.home.getHomeScreenRouteScheme
-import pro.yakuraion.confession.home.homeScreenComposable
-import pro.yakuraion.confession.home.navigateToHomeScreen
+import pro.yakuraion.confession.stacks.getStacksScreenRouteScheme
+import pro.yakuraion.confession.stacks.navigateToStacksScreen
+import pro.yakuraion.confession.stacks.stacksScreenComposable
 
 @Composable
 fun MainScreen(
@@ -31,17 +31,17 @@ internal fun MainScreen(
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = getHomeScreenRouteScheme(),
+        startDestination = getStacksScreenRouteScheme(),
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
     ) {
-        homeScreenComposable()
+        stacksScreenComposable()
     }
 
     navigationCommands.collectInLaunchedEffect { command ->
         when (command) {
-            is MainNavigationCommand.NavigateToHome -> {
-                navController.navigateToHomeScreen()
+            is MainNavigationCommand.NavigateToStacks -> {
+                navController.navigateToStacksScreen()
             }
         }
     }
