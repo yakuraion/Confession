@@ -30,6 +30,14 @@
     <string name="confession_sins_for_teenagers">Рахунак сумлення для падлеткаў</string>
     <string name="confession_everyday_sins">Штодзёны рахунак сумлення</string>
 
+    <string name="confession_children_title">Для дзяцей</string>
+    <string name="confession_children_about">Пра споведзь для дзяцей</string>
+    <string name="confession_children_order">Парадак святой споведзі</string>
+    <string name="confession_children_first_confession">Першая споведзь</string>
+    <string name="confession_children_sins">Рахунак сумлення для дзяцей</string>
+    <string name="confession_children_praying">Малітвы перад і пасля споведзі</string>
+    <string name="confession_children_parads">Парады аб пазбяганні граху</string>
+
     <plurals name="weeks">
         <item quantity="one">тыдзень</item>
         <item quantity="few">тыдни</item>

@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
 import pro.yakuraion.confession.confession.ConfessionScreen
+import pro.yakuraion.confession.confessionchildren.ConfessionChildrenScreen
 import pro.yakuraion.confession.home.HomeScreen
 
 @DestinationScreen
@@ -121,9 +122,11 @@ private fun Pager(
                 onOpenCreateConfessionRequest = onHomeOpenCreateConfessionRequest,
             )
 
+            StacksPage.TOPICS.ordinal -> Unit
+
             StacksPage.CONFESSION.ordinal -> ConfessionScreen()
 
-            else -> Unit
+            StacksPage.FOR_CHILDREN.ordinal -> ConfessionChildrenScreen()
         }
     }
 }
