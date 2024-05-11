@@ -114,6 +114,7 @@ private fun Pager(
     HorizontalPager(
         state = state,
         modifier = modifier,
+        userScrollEnabled = false,
     ) { page ->
         when (page) {
             StacksPage.HOME.ordinal -> HomeScreen(
