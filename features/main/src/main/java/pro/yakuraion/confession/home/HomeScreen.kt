@@ -1,6 +1,5 @@
 package pro.yakuraion.confession.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,18 +16,15 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.yakuraion.destinationscompose.core.DestinationScreen
 import org.koin.androidx.compose.koinViewModel
-import pro.yakuraion.confession.commonui.R
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
 import pro.yakuraion.confession.home.components.HomeLastConfessionCard
 import pro.yakuraion.confession.home.components.HomePakutaCard
+import pro.yakuraion.confession.home.components.HomeQuoteBlock
 import pro.yakuraion.confession.home.components.HomeScreenTopBar
 import java.time.LocalDate
 
@@ -55,7 +51,7 @@ private fun HomeScreen(
             .fillMaxSize()
             .drawBackground()
     ) {
-        BackgroundImage(
+        HomeQuoteBlock(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
@@ -109,25 +105,6 @@ private fun Content(
             modifier = Modifier.fillMaxWidth()
         )
     }
-}
-
-@Composable
-private fun BackgroundImage(
-    modifier: Modifier = Modifier,
-) {
-    val density = LocalDensity.current
-    val heightOfBottomBar = with(LocalDensity.current) { 80.dp.toPx() }
-    val insetsBottom = WindowInsets.systemBars.getBottom(density)
-    val height = heightOfBottomBar + insetsBottom
-
-    Image(
-        painter = painterResource(id = R.drawable.il_home_background),
-        contentDescription = null,
-        modifier = modifier.graphicsLayer {
-            translationY = height
-        },
-        contentScale = ContentScale.Crop
-    )
 }
 
 private fun Modifier.drawBackground(): Modifier {
