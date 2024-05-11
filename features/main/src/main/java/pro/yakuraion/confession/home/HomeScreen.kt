@@ -2,12 +2,12 @@ package pro.yakuraion.confession.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +28,7 @@ import org.koin.androidx.compose.koinViewModel
 import pro.yakuraion.confession.commonui.R
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
 import pro.yakuraion.confession.home.components.HomeLastConfessionCard
+import pro.yakuraion.confession.home.components.HomeScreenTopBar
 import java.time.LocalDate
 
 @DestinationScreen
@@ -37,27 +38,38 @@ fun HomeScreen(
 ) {
     HomeScreen(
         state = viewModel.state,
+        onCalendarClick = viewModel::onCalendarClick,
+        onNotificationsClick = viewModel::onNotificationsClick,
     )
 }
 
 @Composable
 private fun HomeScreen(
     state: HomeState,
+    onCalendarClick: () -> Unit,
+    onNotificationsClick: () -> Unit,
 ) {
-    Scaffold(
-        modifier = Modifier.drawBackground()
-    ) { paddingValues ->
-        Box(
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .drawBackground()
+    ) {
+        BackgroundImage(
             modifier = Modifier
-                .fillMaxSize()
-                .drawBackground()
-                .padding(paddingValues)
-        ) {
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+        )
 
-            BackgroundImage(
+        Column {
+            val topPadding = with(LocalDensity.current) {
+                WindowInsets.systemBars.getTop(this).toDp()
+            }
+            HomeScreenTopBar(
+                onCalendarClick = onCalendarClick,
+                onNotificationsClick = onNotificationsClick,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .align(Alignment.BottomCenter)
+                    .padding(top = topPadding)
             )
 
             when (state) {
@@ -88,7 +100,7 @@ private fun Content(
             modifier = Modifier.constrainAs(lastConfessionDateRef) {
                 start.linkTo(parent.start, 20.dp)
                 end.linkTo(parent.end, 20.dp)
-                top.linkTo(parent.top, 146.dp)
+                top.linkTo(parent.top, 40.dp)
                 width = Dimension.fillToConstraints
             }
         )
@@ -151,6 +163,8 @@ private fun Preview() {
     AppTheme {
         HomeScreen(
             state = state,
+            onCalendarClick = {},
+            onNotificationsClick = {},
         )
     }
 }

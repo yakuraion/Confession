@@ -14,4 +14,12 @@ class HomeViewModel : ViewModel() {
     init {
         state = HomeState.Content(LocalDate.now(), LocalDate.now())
     }
+
+    fun onCalendarClick() {
+
+    }
+
+    fun onNotificationsClick() {
+
+    }
 }
