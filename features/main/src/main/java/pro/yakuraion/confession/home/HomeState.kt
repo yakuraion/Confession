@@ -12,5 +12,6 @@ sealed class HomeState {
         val now: LocalDate,
         val lastConfessionDate: LocalDate,
         val lastConfessionPakuta: String,
+        val pakutaChecked: Boolean,
     ) : HomeState()
 }

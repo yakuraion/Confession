@@ -17,5 +17,6 @@ class SetNewConfessionUseCase(
             pakuta = pakuta,
             comment = comment,
         )
+        lastConfessionRepository.setPakutaChecked(false)
     }
 }

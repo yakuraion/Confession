@@ -15,6 +15,7 @@ import pro.yakuraion.confession.home.HomeState
 fun HomeLastConfession(
     state: HomeState.LastConfession,
     onLastConfessionClick: () -> Unit,
+    onPakutaCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -33,8 +34,8 @@ fun HomeLastConfession(
 
         HomePakutaCard(
             pakutaText = state.lastConfessionPakuta,
-            checked = false,
-            onCheckedChange = {},
+            checked = state.pakutaChecked,
+            onCheckedChange = onPakutaCheckedChange,
             modifier = Modifier.fillMaxWidth()
         )
     }

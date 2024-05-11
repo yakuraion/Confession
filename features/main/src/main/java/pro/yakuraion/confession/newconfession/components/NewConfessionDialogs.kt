@@ -26,7 +26,9 @@ fun NewConfessionDialogs(
     when (dialogsState) {
         is NewConfessionDialogsState.None -> Unit
         is NewConfessionDialogsState.DatePicker -> {
-            val datePickerState = rememberDatePickerState()
+            val datePickerState = rememberDatePickerState(
+                initialSelectedDateMillis = Instant.now().toEpochMilli(),
+            )
             DatePickerDialog(
                 onDismissRequest = onDatePickerDialogDismissRequest,
                 confirmButton = {

@@ -7,13 +7,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import pro.yakuraion.confession.domain.usecases.GetLastConfessionUseCase
+import pro.yakuraion.confession.domain.usecases.GetPakutaCheckedUseCase
+import pro.yakuraion.confession.domain.usecases.SetPakutaCheckedUseCase
 import java.time.LocalDate
 
 class HomeViewModel(
     private val getLastConfessionUseCase: GetLastConfessionUseCase,
+    private val getPakutaCheckedUseCase: GetPakutaCheckedUseCase,
+    private val setPakutaCheckedUseCase: SetPakutaCheckedUseCase,
 ) : ViewModel() {
 
     private val _onOpenCreateConfessionRequest: Channel<Unit> = Channel(Channel.BUFFERED)
@@ -28,7 +33,11 @@ class HomeViewModel(
 
     private fun collectLastConfessions() {
         viewModelScope.launch {
-            getLastConfessionUseCase.invoke().collect { lastConfession ->
+            combine(
+                getLastConfessionUseCase.invoke(),
+                getPakutaCheckedUseCase.invoke()
+            ) { lastConfession, pakutaChecked ->
+
                 state = if (lastConfession == null) {
                     HomeState.NoLastConfession
                 } else {
@@ -36,9 +45,10 @@ class HomeViewModel(
                         now = LocalDate.now(),
                         lastConfessionDate = lastConfession.date,
                         lastConfessionPakuta = lastConfession.pakuta,
+                        pakutaChecked = pakutaChecked
                     )
                 }
-            }
+            }.collect {}
         }
     }
 
@@ -56,5 +66,11 @@ class HomeViewModel(
 
     fun onLastConfessionClick() {
         _onOpenCreateConfessionRequest.trySend(Unit)
+    }
+
+    fun onPakutaCheckedChange(isChecked: Boolean) {
+        viewModelScope.launch {
+            setPakutaCheckedUseCase.invoke(isChecked)
+        }
     }
 }

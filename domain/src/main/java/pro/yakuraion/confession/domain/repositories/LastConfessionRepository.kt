@@ -8,9 +8,13 @@ interface LastConfessionRepository {
 
     fun getLastConfession(): Flow<LastConfession?>
 
+    fun getPakutaChecked(): Flow<Boolean>
+
     suspend fun setLastConfession(
         date: LocalDate,
         pakuta: String,
         comment: String,
     )
+
+    suspend fun setPakutaChecked(checked: Boolean)
 }

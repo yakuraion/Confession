@@ -13,16 +13,21 @@ fun AppCheckbox(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     Checkbox(
         checked = checked,
         onCheckedChange = onCheckedChange,
         modifier = modifier,
+        enabled = enabled,
         colors = CheckboxDefaults.colors(
             checkedColor = Color.White,
+            disabledCheckedColor = Color.White,
             uncheckedColor = Color.White,
+            disabledUncheckedColor = Color.White,
             checkmarkColor = Color.Black,
+            disabledIndeterminateColor = Color.Black,
         ),
         interactionSource = interactionSource,
     )

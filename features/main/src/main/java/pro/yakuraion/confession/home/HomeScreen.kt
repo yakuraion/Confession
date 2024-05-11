@@ -45,6 +45,7 @@ fun HomeScreen(
         onNotificationsClick = viewModel::onNotificationsClick,
         onCreateConfessionClick = viewModel::onCreateConfessionClick,
         onLastConfessionClick = viewModel::onLastConfessionClick,
+        onPakutaCheckedChange = viewModel::onPakutaCheckedChange,
     )
 }
 
@@ -55,6 +56,7 @@ private fun HomeScreen(
     onNotificationsClick: () -> Unit,
     onCreateConfessionClick: () -> Unit,
     onLastConfessionClick: () -> Unit,
+    onPakutaCheckedChange: (Boolean) -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -94,6 +96,7 @@ private fun HomeScreen(
                     HomeLastConfession(
                         state = state,
                         onLastConfessionClick = onLastConfessionClick,
+                        onPakutaCheckedChange = onPakutaCheckedChange,
                     )
                 }
             }
@@ -134,7 +137,8 @@ private fun PreviewLastConfession() {
     val state = HomeState.LastConfession(
         now = LocalDate.of(2024, 5, 21),
         lastConfessionDate = LocalDate.of(2024, 4, 20),
-        lastConfessionPakuta = "Вячочак до Божай Миласернасци"
+        lastConfessionPakuta = "Вячочак до Божай Миласернасци",
+        pakutaChecked = false,
     )
     AppTheme {
         HomeScreen(
@@ -143,6 +147,7 @@ private fun PreviewLastConfession() {
             onNotificationsClick = {},
             onCreateConfessionClick = {},
             onLastConfessionClick = {},
+            onPakutaCheckedChange = {},
         )
     }
 }
@@ -158,6 +163,7 @@ private fun PreviewNoLastConfession() {
             onNotificationsClick = {},
             onCreateConfessionClick = {},
             onLastConfessionClick = {},
+            onPakutaCheckedChange = {},
         )
     }
 }

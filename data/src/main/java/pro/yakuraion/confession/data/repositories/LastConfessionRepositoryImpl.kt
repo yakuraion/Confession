@@ -25,6 +25,11 @@ class LastConfessionRepositoryImpl(
             .flowOn(dispatchers.ioDispatcher)
     }
 
+    override fun getPakutaChecked(): Flow<Boolean> {
+        return lastConfessionPreferences.pakutaChecked
+            .flowOn(dispatchers.ioDispatcher)
+    }
+
     override suspend fun setLastConfession(date: LocalDate, pakuta: String, comment: String) {
         withContext(dispatchers.ioDispatcher) {
             val data = LastConfessionModel(
@@ -33,6 +38,12 @@ class LastConfessionRepositoryImpl(
                 comment = comment,
             )
             lastConfessionPreferences.setLastConfession(data)
+        }
+    }
+
+    override suspend fun setPakutaChecked(checked: Boolean) {
+        withContext(dispatchers.ioDispatcher) {
+            lastConfessionPreferences.setPakutaChecked(checked)
         }
     }
 }

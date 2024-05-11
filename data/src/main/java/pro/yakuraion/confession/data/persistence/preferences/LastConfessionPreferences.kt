@@ -1,6 +1,7 @@
 package pro.yakuraion.confession.data.persistence.preferences
 
 import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -21,6 +22,10 @@ class LastConfessionPreferences(
         stringValue?.let { gson.fromJson(it, LastConfessionModel::class.java) }
     }
 
+    val pakutaChecked: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[PAKUTA_CHECKED] ?: false
+    }
+
     suspend fun setLastConfession(value: LastConfessionModel?) {
         context.dataStore.edit { preferences ->
             val stringValue = value?.let { gson.toJson(it) }
@@ -32,10 +37,17 @@ class LastConfessionPreferences(
         }
     }
 
+    suspend fun setPakutaChecked(value: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[PAKUTA_CHECKED] = value
+        }
+    }
+
     companion object {
 
         private const val NAME = "last_confession_preferences"
 
         private val LAST_CONFESSION_JSON = stringPreferencesKey("lastConfessionJson")
+        private val PAKUTA_CHECKED = booleanPreferencesKey("pakutaChecked")
     }
 }
