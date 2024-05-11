@@ -49,6 +49,10 @@ fun NewConfessionDialogs(
             ) {
                 DatePicker(
                     state = datePickerState,
+                    dateValidator = { millis ->
+                        val localDate = Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault()).toLocalDate()
+                        !LocalDate.now().isBefore(localDate)
+                    },
                     title = null,
                     headline = null,
                     showModeToggle = false,
