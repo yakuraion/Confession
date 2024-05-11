@@ -2,6 +2,8 @@ package pro.yakuraion.confession.newconfession
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -18,6 +21,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -33,7 +37,9 @@ import org.koin.androidx.compose.koinViewModel
 import pro.yakuraion.confession.commonui.R
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
 import pro.yakuraion.confession.commonui.compose.widgets.textfields.AppOutlinedTextField
+import pro.yakuraion.confession.newconfession.components.NewConfessionDialogs
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @DestinationScreen
 @Composable
@@ -44,10 +50,14 @@ fun NewConfessionScreen(
     NewConfessionScreen(
         state = viewModel.state,
         onCloseClick = onBackRequest,
+        onDateClick = viewModel::onDateClick,
         onDateSelect = viewModel::onDateSelect,
         onPakutaChanged = viewModel::onPakutaChanged,
         onCommentChanged = viewModel::onCommentChanged,
         onContinueClick = viewModel::onContinueClick,
+        dialogsState = viewModel.dialogsState,
+        onDatePickerDialogDismissRequest = viewModel::onDatePickerDialogDismissRequest,
+        onDatePickerDialogDateSelect = viewModel::onDatePickerDialogDateSelect,
     )
 }
 
@@ -55,6 +65,37 @@ fun NewConfessionScreen(
 private fun NewConfessionScreen(
     state: NewConfessionState,
     onCloseClick: () -> Unit,
+    onDateClick: () -> Unit,
+    onDateSelect: (date: LocalDate) -> Unit,
+    onPakutaChanged: (pakuta: String) -> Unit,
+    onCommentChanged: (comment: String) -> Unit,
+    onContinueClick: () -> Unit,
+    dialogsState: NewConfessionDialogsState,
+    onDatePickerDialogDismissRequest: () -> Unit,
+    onDatePickerDialogDateSelect: (LocalDate) -> Unit,
+) {
+    Content(
+        state = state,
+        onCloseClick = onCloseClick,
+        onDateClick = onDateClick,
+        onDateSelect = onDateSelect,
+        onPakutaChanged = onPakutaChanged,
+        onCommentChanged = onCommentChanged,
+        onContinueClick = onContinueClick,
+    )
+
+    NewConfessionDialogs(
+        dialogsState = dialogsState,
+        onDatePickerDialogDismissRequest = onDatePickerDialogDismissRequest,
+        onDatePickerDialogDateSelect = onDatePickerDialogDateSelect,
+    )
+}
+
+@Composable
+private fun Content(
+    state: NewConfessionState,
+    onCloseClick: () -> Unit,
+    onDateClick: () -> Unit,
     onDateSelect: (date: LocalDate) -> Unit,
     onPakutaChanged: (pakuta: String) -> Unit,
     onCommentChanged: (comment: String) -> Unit,
@@ -64,6 +105,7 @@ private fun NewConfessionScreen(
         modifier = Modifier
             .fillMaxSize()
             .drawBackground()
+            .systemBarsPadding()
     ) {
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -83,6 +125,7 @@ private fun NewConfessionScreen(
 
         DateField(
             date = state.date,
+            onClick = onDateClick,
         )
 
         Spacer(modifier = Modifier.height(18.dp))
@@ -139,8 +182,12 @@ private fun Title(modifier: Modifier = Modifier) {
 @Composable
 private fun DateField(
     date: LocalDate?,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val formatter = DateTimeFormatter.ofPattern("dd/LL/yyyy")
+    val dateString = date?.format(formatter).orEmpty()
+
     Column(modifier = modifier.padding(horizontal = 20.dp)) {
         Text(
             text = stringResource(id = R.string.new_confession_date_label),
@@ -150,10 +197,16 @@ private fun DateField(
         )
 
         Spacer(modifier = Modifier.height(12.dp))
+
+        val interactionSource = remember { MutableInteractionSource() }
         AppOutlinedTextField(
-            value = "12/14/15",
+            value = dateString,
             onValueChange = {},
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable(interactionSource = interactionSource, indication = null) { onClick.invoke() },
+            enabled = false,
+            placeholder = stringResource(id = R.string.new_confession_date_placeholder)
         )
     }
 }
@@ -263,10 +316,14 @@ private fun Preview() {
         NewConfessionScreen(
             state = state,
             onCloseClick = {},
+            onDateClick = {},
             onDateSelect = {},
             onPakutaChanged = {},
             onCommentChanged = {},
             onContinueClick = {},
+            dialogsState = NewConfessionDialogsState.None,
+            onDatePickerDialogDismissRequest = {},
+            onDatePickerDialogDateSelect = {},
         )
     }
 }
