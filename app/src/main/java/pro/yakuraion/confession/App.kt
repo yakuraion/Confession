@@ -4,6 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import pro.yakuraion.confession.di.appModule
+import pro.yakuraion.confession.di.mainModule
 import pro.yakuraion.confession.logs.TimberReleaseTree
 import timber.log.Timber
 
@@ -18,7 +19,10 @@ class App : Application() {
     private fun setUpKoin() {
         startKoin {
             androidContext(applicationContext)
-            modules(appModule)
+            modules(
+                appModule,
+                mainModule,
+            )
         }
     }
 

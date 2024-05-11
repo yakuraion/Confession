@@ -15,4 +15,8 @@
     <string name="top_bar_icon_settings_content_description">Settings</string>
     <string name="top_bar_icon_search_content_description">Search</string>
 
+    <string name="last_confession_title">Дата апошняй споведзі</string>
+    <string name="last_confession_last">назад</string>
+    <string name="pakuta_title">Пакута:</string>
+
 </resources>
