@@ -14,6 +14,7 @@ import pro.yakuraion.confession.home.HomeState
 @Composable
 fun HomeLastConfession(
     state: HomeState.LastConfession,
+    onLastConfessionClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -24,6 +25,7 @@ fun HomeLastConfession(
         HomeLastConfessionCard(
             now = state.now,
             lastDate = state.lastConfessionDate,
+            onClick = onLastConfessionClick,
             modifier = Modifier.fillMaxWidth()
         )
 

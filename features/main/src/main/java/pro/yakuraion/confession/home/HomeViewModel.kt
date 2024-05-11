@@ -53,4 +53,8 @@ class HomeViewModel(
     fun onCreateConfessionClick() {
         _onOpenCreateConfessionRequest.trySend(Unit)
     }
+
+    fun onLastConfessionClick() {
+        _onOpenCreateConfessionRequest.trySend(Unit)
+    }
 }

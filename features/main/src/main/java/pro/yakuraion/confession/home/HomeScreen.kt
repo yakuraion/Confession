@@ -44,6 +44,7 @@ fun HomeScreen(
         onCalendarClick = viewModel::onCalendarClick,
         onNotificationsClick = viewModel::onNotificationsClick,
         onCreateConfessionClick = viewModel::onCreateConfessionClick,
+        onLastConfessionClick = viewModel::onLastConfessionClick,
     )
 }
 
@@ -53,6 +54,7 @@ private fun HomeScreen(
     onCalendarClick: () -> Unit,
     onNotificationsClick: () -> Unit,
     onCreateConfessionClick: () -> Unit,
+    onLastConfessionClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -91,6 +93,7 @@ private fun HomeScreen(
                 is HomeState.LastConfession -> {
                     HomeLastConfession(
                         state = state,
+                        onLastConfessionClick = onLastConfessionClick,
                     )
                 }
             }
@@ -139,6 +142,7 @@ private fun PreviewLastConfession() {
             onCalendarClick = {},
             onNotificationsClick = {},
             onCreateConfessionClick = {},
+            onLastConfessionClick = {},
         )
     }
 }
@@ -153,6 +157,7 @@ private fun PreviewNoLastConfession() {
             onCalendarClick = {},
             onNotificationsClick = {},
             onCreateConfessionClick = {},
+            onLastConfessionClick = {},
         )
     }
 }
