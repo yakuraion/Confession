@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "pro.yakuraion.parish.data"
+    namespace = "pro.yakuraion.confession.data"
 
     val roomSchemaLocation = "$projectDir/schemas/room"
 

@@ -3,9 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "pro.yakuraion.parish.main"
-}
-
-dependencies {
-    implementation(project(":features:parishes"))
+    namespace = "pro.yakuraion.confession.main"
 }

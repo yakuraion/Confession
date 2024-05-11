@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "pro.yakuraion.parish.debugging"
+    namespace = "pro.yakuraion.confession.debugging"
 }

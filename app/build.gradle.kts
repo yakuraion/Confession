@@ -12,10 +12,10 @@ plugins {
 val customProperties = getPropertiesOrNull(File(rootDir, "custom.properties"))
 
 android {
-    namespace = "pro.yakuraion.parish"
+    namespace = "pro.yakuraion.confession"
 
     defaultConfig {
-        applicationId = "pro.yakuraion.parish"
+        applicationId = "pro.yakuraion.confession"
         versionCode = 1
         versionName = "0.1.0"
 
@@ -33,7 +33,7 @@ android {
             storePassword = "12345678"
         }
 
-        val prodPropertiesPath = "${System.getProperty("user.home")}/keystores/Parish/credentials.properties"
+        val prodPropertiesPath = "${System.getProperty("user.home")}/keystores/Confession/credentials.properties"
         getPropertiesOrNull(prodPropertiesPath)?.let { props ->
             create("prod") {
                 keyAlias = props.getProperty("keyAlias")
@@ -56,12 +56,12 @@ android {
                 "proguard/gson.pro",
             )
 
-            resValue("string", "app_name", "Parish")
+            resValue("string", "app_name", "Confession")
         }
         getByName("debug") {
             applicationIdSuffix = ".debug"
 
-            resValue("string", "app_name", "Parish (debug)")
+            resValue("string", "app_name", "Confession (debug)")
         }
     }
     flavorDimensions += "environment"
@@ -89,14 +89,14 @@ android {
     }
 }
 
-androidComponents {
-    beforeVariants { variantBuilder ->
-        // Temporarily disable prod builds
-        if (variantBuilder.productFlavors.containsAll(listOf("environment" to "prod"))) {
-            variantBuilder.enable = false
-        }
-    }
-}
+//androidComponents {
+//    beforeVariants { variantBuilder ->
+//        // Temporarily disable prod builds
+//        if (variantBuilder.productFlavors.containsAll(listOf("environment" to "prod"))) {
+//            variantBuilder.enable = false
+//        }
+//    }
+//}
 
 if (System.getenv("CI") != null) {
     tasks.withType<Test> {
@@ -129,7 +129,6 @@ dependencies {
     implementation(project(":data"))
 
     implementation(project(":features:main"))
-    implementation(project(":features:parishes"))
 
     implementation(project(":features:debugging"))
     implementation(libs.seismic)

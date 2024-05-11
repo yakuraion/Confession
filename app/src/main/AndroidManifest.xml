@@ -17,7 +17,7 @@
         tools:targetApi="33">
 
         <activity
-            android:name="pro.yakuraion.parish.AppActivity"
+            android:name="pro.yakuraion.confession.AppActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"

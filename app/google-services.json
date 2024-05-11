@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "508741905601",
-    "project_id": "parish-eb81d",
-    "storage_bucket": "parish-eb81d.appspot.com"
+    "project_number": "664446395851",
+    "project_id": "confession-47d76",
+    "storage_bucket": "confession-47d76.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:508741905601:android:c69f68b453847baa37b840",
+        "mobilesdk_app_id": "1:664446395851:android:ffb27590d007193776824e",
         "android_client_info": {
-          "package_name": "pro.yakuraion.parish.dev"
+          "package_name": "pro.yakuraion.confession"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAevK1yH54V_lFGw7OWR_W0a4rKILFmSmM"
+          "current_key": "AIzaSyAwJrgh-qwSZ2nHhc2jOivOGcbp-aaN7hw"
         }
       ],
       "services": {
@@ -26,15 +26,15 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:508741905601:android:0a09c56e5c95262037b840",
+        "mobilesdk_app_id": "1:664446395851:android:7eb5a627aa02822b76824e",
         "android_client_info": {
-          "package_name": "pro.yakuraion.parish.dev.debug"
+          "package_name": "pro.yakuraion.confession.dev.debug"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAevK1yH54V_lFGw7OWR_W0a4rKILFmSmM"
+          "current_key": "AIzaSyAwJrgh-qwSZ2nHhc2jOivOGcbp-aaN7hw"
         }
       ],
       "services": {

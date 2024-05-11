@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Parish"
+rootProject.name = "Confession"
 
 include(":app")
 include(":data")
@@ -23,7 +23,6 @@ include(":common-ui")
 include(":common-tests-ui")
 include(":features:main")
 include(":features:debugging")
-include(":features:parishes")
 
 includeBuild("gradle/plugins/conventions")
 

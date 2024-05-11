@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "pro.yakuraion.parish.domain"
+    namespace = "pro.yakuraion.confession.domain"
 
     buildFeatures.compose = true
     composeOptions.kotlinCompilerExtensionVersion = "1.5.5"

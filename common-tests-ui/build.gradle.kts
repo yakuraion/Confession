@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "pro.yakuraion.parish.commontestsui"
+    namespace = "pro.yakuraion.confession.commontestsui"
 }
 
 dependencies {
