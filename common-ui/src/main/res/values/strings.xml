@@ -24,4 +24,9 @@
     <string name="home_last_confession_last">назад</string>
     <string name="home_pakuta_title">Пакута:</string>
 
+    <string name="new_confession_title">Новая споведзь</string>
+    <string name="new_confession_date_label">Дата</string>
+    <string name="new_confession_pakuta_label">Пакута</string>
+    <string name="new_confession_comment_label">Каментар</string>
+    <string name="new_confession_continue_button">Гатова</string>
 </resources>
