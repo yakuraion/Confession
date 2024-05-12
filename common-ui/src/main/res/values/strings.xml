@@ -38,6 +38,8 @@
     <string name="confession_children_praying">Малітвы перад і пасля споведзі</string>
     <string name="confession_children_parads">Парады аб пазбяганні граху</string>
 
+    <string name="sins_title">Рахунак сумлення</string>
+
     <plurals name="weeks">
         <item quantity="one">тыдзень</item>
         <item quantity="few">тыдни</item>

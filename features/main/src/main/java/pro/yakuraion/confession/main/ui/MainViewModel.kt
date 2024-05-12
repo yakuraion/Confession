@@ -14,11 +14,19 @@ class MainViewModel : ViewModel() {
         _navigationCommands.trySend(MainNavigationCommand.NavigateToNewConfession)
     }
 
+    fun onStacksOpenSinsRequest() {
+        _navigationCommands.trySend(MainNavigationCommand.NavigateToSins)
+    }
+
     fun onNewConfessionBackRequest() {
         _navigationCommands.trySend(MainNavigationCommand.NavigateBack)
     }
 
     fun onNewConfessionSuccess() {
+        _navigationCommands.trySend(MainNavigationCommand.NavigateBack)
+    }
+
+    fun onSinsBackRequest() {
         _navigationCommands.trySend(MainNavigationCommand.NavigateBack)
     }
 }

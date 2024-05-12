@@ -7,4 +7,6 @@ sealed class MainNavigationCommand {
     data object NavigateToStacks : MainNavigationCommand()
 
     data object NavigateToNewConfession : MainNavigationCommand()
+
+    data object NavigateToSins : MainNavigationCommand()
 }

@@ -13,6 +13,8 @@ import pro.yakuraion.confession.commonui.compose.coroutines.collectInLaunchedEff
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
 import pro.yakuraion.confession.newconfession.navigateToNewConfessionScreen
 import pro.yakuraion.confession.newconfession.newConfessionScreenComposable
+import pro.yakuraion.confession.sins.navigateToSinsScreen
+import pro.yakuraion.confession.sins.sinsScreenComposable
 import pro.yakuraion.confession.stacks.getStacksScreenRouteScheme
 import pro.yakuraion.confession.stacks.navigateToStacksScreen
 import pro.yakuraion.confession.stacks.stacksScreenComposable
@@ -24,8 +26,10 @@ fun MainScreen(
     MainScreen(
         navigationCommands = viewModel.navigationCommands,
         onStacksOpenCreateConfessionRequest = viewModel::onStacksOpenCreateConfessionRequest,
+        onStacksOpenSinsRequest = viewModel::onStacksOpenSinsRequest,
         onNewConfessionBackRequest = viewModel::onNewConfessionBackRequest,
         onNewConfessionSuccess = viewModel::onNewConfessionSuccess,
+        onSinsBackRequest = viewModel::onSinsBackRequest,
     )
 }
 
@@ -33,8 +37,10 @@ fun MainScreen(
 internal fun MainScreen(
     navigationCommands: Flow<MainNavigationCommand>,
     onStacksOpenCreateConfessionRequest: () -> Unit,
+    onStacksOpenSinsRequest: () -> Unit,
     onNewConfessionBackRequest: () -> Unit,
     onNewConfessionSuccess: () -> Unit,
+    onSinsBackRequest: () -> Unit,
 ) {
     val navController = rememberNavController()
     NavHost(
@@ -45,10 +51,14 @@ internal fun MainScreen(
     ) {
         stacksScreenComposable(
             onOpenCreateConfessionRequest = onStacksOpenCreateConfessionRequest,
+            onOpenSinsRequest = onStacksOpenSinsRequest,
         )
         newConfessionScreenComposable(
             onBackRequest = onNewConfessionBackRequest,
             onSuccess = onNewConfessionSuccess,
+        )
+        sinsScreenComposable(
+            onBackRequest = onSinsBackRequest,
         )
     }
 
@@ -64,6 +74,10 @@ internal fun MainScreen(
 
             is MainNavigationCommand.NavigateToNewConfession -> {
                 navController.navigateToNewConfessionScreen()
+            }
+
+            is MainNavigationCommand.NavigateToSins -> {
+                navController.navigateToSinsScreen()
             }
         }
     }

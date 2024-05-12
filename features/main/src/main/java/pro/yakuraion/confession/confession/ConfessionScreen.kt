@@ -17,14 +17,20 @@ import androidx.compose.ui.unit.dp
 import org.koin.androidx.compose.koinViewModel
 import pro.yakuraion.confession.common.CurveTopBar
 import pro.yakuraion.confession.commonui.R
+import pro.yakuraion.confession.commonui.compose.coroutines.collectInLaunchedEffect
 import pro.yakuraion.confession.commonui.compose.theme.AppTheme
 import pro.yakuraion.confession.confession.components.ConfessionRow
 import pro.yakuraion.confession.confession.models.ConfessionItem
 
 @Composable
 fun ConfessionScreen(
+    onOpenSinsRequest: () -> Unit,
     viewModel: ConfessionViewModel = koinViewModel(),
 ) {
+    viewModel.onOpenSinsRequest.collectInLaunchedEffect {
+        onOpenSinsRequest.invoke()
+    }
+
     ConfessionScreen(
         onConfessionItemClick = viewModel::onConfessionItemClick,
     )
