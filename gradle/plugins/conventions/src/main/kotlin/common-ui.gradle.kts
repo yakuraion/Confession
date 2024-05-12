@@ -53,4 +53,7 @@ dependencies {
     add("androidTestImplementation", versionCatalog.findLibrary("androidx-test-junit").get())
     add("androidTestImplementation", versionCatalog.findLibrary("androidx-test-junit-ktx").get())
     add("androidTestImplementation", versionCatalog.findLibrary("androidx-test-runner").get())
+
+    add("implementation", versionCatalog.findLibrary("coil").get())
+    add("implementation", versionCatalog.findLibrary("coil-videos").get())
 }

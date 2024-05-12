@@ -40,6 +40,8 @@
 
     <string name="sins_title">Рахунак сумлення</string>
 
+    <string name="topics_title">Карыснае</string>
+
     <plurals name="weeks">
         <item quantity="one">тыдзень</item>
         <item quantity="few">тыдни</item>

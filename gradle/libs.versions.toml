@@ -95,6 +95,9 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version = "32.6.0"
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 
+coil = { module = "io.coil-kt:coil-compose", version = "2.6.0" }
+coil-videos = { module = "io.coil-kt:coil-video", version = "2.6.0" }
+
 yakuraion-android-common-kotlin = { module = "pro.yakuraion.android-common:kotlin", version = "1" }
 yakuraion-android-common-coroutines = { module = "pro.yakuraion.android-common:coroutines", version = "1" }
 yakuraion-android-common-coroutines-tests = { module = "pro.yakuraion.android-common:coroutines-tests", version = "1" }

@@ -8,6 +8,7 @@ import pro.yakuraion.confession.home.HomeViewModel
 import pro.yakuraion.confession.newconfession.NewConfessionViewModel
 import pro.yakuraion.confession.sins.SinsViewModel
 import pro.yakuraion.confession.stacks.StacksViewModel
+import pro.yakuraion.confession.topics.TopicsViewModel
 
 val mainModule = module {
     viewModelOf(::StacksViewModel)
@@ -16,4 +17,5 @@ val mainModule = module {
     viewModelOf(::ConfessionViewModel)
     viewModelOf(::ConfessionChildrenViewModel)
     viewModelOf(::SinsViewModel)
+    viewModelOf(::TopicsViewModel)
 }

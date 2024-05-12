@@ -28,6 +28,7 @@ import pro.yakuraion.confession.commonui.compose.theme.AppTheme
 import pro.yakuraion.confession.confession.ConfessionScreen
 import pro.yakuraion.confession.confessionchildren.ConfessionChildrenScreen
 import pro.yakuraion.confession.home.HomeScreen
+import pro.yakuraion.confession.topics.TopicsScreen
 
 @DestinationScreen
 @Composable
@@ -127,7 +128,7 @@ private fun Pager(
                 onOpenCreateConfessionRequest = onHomeOpenCreateConfessionRequest,
             )
 
-            StacksPage.TOPICS.ordinal -> Unit
+            StacksPage.TOPICS.ordinal -> TopicsScreen()
 
             StacksPage.CONFESSION.ordinal -> ConfessionScreen(
                 onOpenSinsRequest = onConfessionOpenSinsRequest,

@@ -5,6 +5,7 @@ import org.koin.dsl.module
 import pro.yakuraion.confession.domain.usecases.GetLastConfessionUseCase
 import pro.yakuraion.confession.domain.usecases.GetPakutaCheckedUseCase
 import pro.yakuraion.confession.domain.usecases.GetSinTopicsUseCase
+import pro.yakuraion.confession.domain.usecases.GetTopicsUseCase
 import pro.yakuraion.confession.domain.usecases.SetNewConfessionUseCase
 import pro.yakuraion.confession.domain.usecases.SetPakutaCheckedUseCase
 
@@ -14,4 +15,5 @@ internal val useCasesModule = module {
     factoryOf(::GetPakutaCheckedUseCase)
     factoryOf(::SetPakutaCheckedUseCase)
     factoryOf(::GetSinTopicsUseCase)
+    factoryOf(::GetTopicsUseCase)
 }
