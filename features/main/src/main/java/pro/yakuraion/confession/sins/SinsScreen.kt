@@ -35,12 +35,14 @@ fun SinsScreen(
 ) {
     SinsScreen(
         onBackClick = onBackRequest,
+        state = viewModel.state,
     )
 }
 
 @Composable
 private fun SinsScreen(
     onBackClick: () -> Unit,
+    state: SinsState,
 ) {
     val topPadding = with(LocalDensity.current) {
         WindowInsets.systemBars.getTop(this).toDp()
@@ -67,7 +69,15 @@ private fun SinsScreen(
             modifier = Modifier.padding(start = 40.dp)
         )
 
-        SinsList()
+        when (state) {
+            is SinsState.Loading -> Unit
+            is SinsState.Content -> SinsList(
+                state = state,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            )
+        }
     }
 }
 
@@ -111,6 +121,7 @@ private fun Preview() {
     AppTheme {
         SinsScreen(
             onBackClick = {},
+            state = SinsState.Loading,
         )
     }
 }
